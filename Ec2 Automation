@@ -1,0 +1,30 @@
+import boto3
+
+ec2 = boto3.resource('ec2','ap-south-1')
+
+# Set the AMI ID, instance type, and region
+ami_id = 'ami-0123456789abcdef0'
+instance_type = 't2.micro'
+region = 'ap-south-1'
+
+# Create the EC2 instance
+instances = ec2.create_instances(
+    ImageId=ami_id,
+    InstanceType=instance_type,
+    MinCount=1,
+    MaxCount=1,
+    TagSpecifications=[
+        {
+            'ResourceType': 'instance',
+            'Tags': [
+                {
+                    'Key': 'Name',
+                    'Value': 'My EC2 Instance'
+                }
+            ]
+        }
+    ]
+)
+
+# Print the instance ID
+print(instances[0].id)
