@@ -1,0 +1,13 @@
+import boto3
+
+sns_client = boto3.client('sns')
+
+response = sns_client.publish(
+    PhoneNumber='+12065551212', 
+    Message='This is a test SMS message',
+    TopicArn='arn:aws:sns:ap-south-1:513251315828:imagetopicdeletion', 
+   
+    Subject='Mail From Aditya Ghatiya'
+)
+
+print(response)
